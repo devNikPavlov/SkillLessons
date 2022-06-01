@@ -44,8 +44,26 @@ public class Main {
                         menu = scanner.next().charAt(0);
                         break;
                     case '2':
-
+                        cateating();
+                        break;
+                    case '3':
+                        catgames();
+                        break;
+                    case 'S':
+                        variants = 501;
+                        program = false;
+                        break;
+                    default:
+                        System.out.println("Неверная команда, повторите ввод");
                 }
+                if (variants >= 20) {
+                    age += 1;
+                }
+                hunger -= 5;
+                if (hunger <= 0) {
+                    hunger = 0;
+                }
+                weight -= 0.1;
             }
         }
     }
@@ -62,7 +80,70 @@ public class Main {
                 if (hunger >= 50) {
                     System.out.println("Похоже кот не голодный");
                     System.out.println("введите \"x\" для выхода");
+                } else {
+                    System.out.println("Выберите блюдо.");
+                    System.out.println("1. Консервы с тунцом");
+                    System.out.println("2. Кроличий паштет");
+                    System.out.println("3. Колбаса со стола");
+                    eatmenu = scanner.next().charAt(0);
+                    switch (eatmenu) {
+                        case '1':
+                            System.out.println("Кот благодарен вам и, похоже он набрал лишние 20 грамм. Давайте поиграем с " + name);
+                            System.out.println("введите \"x\" для выхода");
+                            hunger += 40;
+                            weight += 0.20;
+                            break;
+                        case '2':
+                            System.out.println("Кот благодарен вам и, похоже он набрал лишние 40 грамм. Давайте поиграем с " + name);
+                            System.out.println("введите \"x\" для выхода");
+                            hunger += 60;
+                            weight += 0.40;
+                            break;
+                        case '3':
+                            System.out.println("Кот благодарен вам и, похоже он набрал лишние 60 грамм. Давайте поиграем с " + name);
+                            System.out.println("введите \"x\" для выхода");
+                            hunger += 80;
+                            weight += 0.60;
+                            break;
+                        default:
+                            System.out.println("Неверная команда, попробуйте занового. Введите \"x\" для выхода");
+                    }
+                    if (hunger >= 100) {
+                        hunger = 100;
+                    }
                 }
+                eatmenu = scanner.next().charAt(0);
+                if (eatmenu == 'x') {
+                    eatHunger = false;
+                } else {
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                }
+                System.out.println("Неверная команда, попробуйте еще раз");
+            }
+        }
+    }
+
+    public static void catgames() throws IOException, InterruptedException {
+        char gamemenu;
+        Scanner scanner = new Scanner(System.in);
+        for (int game = 0; game < 100; game += 50) {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            if (needgames >= 100) {
+                System.out.println("Кажется кот наигрался и хочет поесть");
+            } else if (hunger <= 20 || hunger >= 90) {
+                System.out.println("Я не могу играть потому что голоден или много съел");
+                System.out.println("Кот развернулся и ушел спать");
+            } else {
+                needgames += 50;
+                System.out.println("Поиграли хорошо + " + needgames);
+                hunger -= 60;
+                weight -= 0.3;
+            }
+            System.out.println("Введите \"x\" для выхода");
+            gamemenu = scanner.next().charAt(0);
+            switch (gamemenu) {
+                case 'x' -> game = 100;
+                default -> System.out.println("Неверно введена команда");
             }
         }
     }
